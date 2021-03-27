@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <signal.h>
 #include <execinfo.h>
+#include <string.h>
 
 void handler(int nSignum, siginfo_t* si, void* vcontext);
 
