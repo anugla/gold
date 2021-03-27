@@ -1,4 +1,11 @@
 #include <stdint.h>
+#include "../src/gold_gstruct.h"
+
+gstruct_t* gs;
+
+extern void goldlib_loadGStruct(gstruct_t* gstruct) {
+	gs = gstruct;
+}
 
 extern uint32_t goldlib_getVersion() {
 	return 1;

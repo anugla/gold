@@ -1,3 +1,4 @@
+#include <curses.h>
 #include "gold_error.h"
 
 void handler(int nSignum, siginfo_t* si, void* vcontext) {
@@ -8,6 +9,8 @@ void handler(int nSignum, siginfo_t* si, void* vcontext) {
 	#else
 	context->uc_mcontext.gregs[REG_EIP]++;
 	#endif
+	endwin();
+	exit(0);
 }
 
 void reg_handler() {

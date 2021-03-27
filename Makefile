@@ -6,6 +6,7 @@ SRC_DIRS ?= ./src
 RESOURCE_DIRS ?= ./rsc
 RELEASE_DIRS ?= ./release
 
+ARGS ?= dev
 SRCS := $(shell find $(SRC_DIRS) -name *.cpp -or -name *.c -or -name *.s)
 OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 RSCS := $(shell find $(RESOURCE_DIRS))
@@ -32,7 +33,7 @@ $(BUILD_DIR)/%.cpp.o: %.cpp
 ./goldso/gold.so: ./goldso/gold.c
 	$(CC) -c -Wall -Werror -fpic $<
 	mv ./gold.o ./goldso/
-	$(CC) -shared -o ./goldso/gold.so ./goldso/gold.o
+	$(CC) -lcurses -shared -o ./goldso/gold.so ./goldso/gold.o
 
 .PHONY: clean
 
@@ -57,10 +58,10 @@ preprun: ./build/goldlinux ./goldso/gold.so
 .PHONY: run
 
 run: preprun
-	cd build && ./goldlinux
+	cd build && ./goldlinux $(ARGS)
 
 debug: preprun
-	cd build && gdb ./goldlinux
+	cd build && gdb --args ./goldlinux $(ARGS)
 
 package: preprun LICENSE README.md
 	cp ./LICENSE ./build/

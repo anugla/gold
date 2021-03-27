@@ -1,0 +1,3 @@
+GOLD Base Game
+
+This shouldnt be modified by end-users or game-makers unless if required.

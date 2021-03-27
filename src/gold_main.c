@@ -17,13 +17,15 @@ int main(int argc, char** argv) {
 		printf("arg: %s\n",argv[1]);
 		if(strcmp(argv[1],"license") == 0) {
 			system("cat ./LICENSE");
-			return;
+			return 0;
 		}
 	}
 	game_t* base = gold_loadgame("games/gold/gold.so");
+	gstruct_t* gstruct = malloc(sizeof(gstruct_t));
 	printf("gold base version: %08x\n",base->version());
 	printf("base license: %s\n",base->loadLicense());
 	settitle(base->loadTitle());
+	base->loadGStruct(gstruct);
 	initscr();
 	cbreak();
 	noecho();
