@@ -18,5 +18,4 @@ void reg_handler() {
 	memset(&action, 0, sizeof(struct sigaction));
 	action.sa_flags = SA_SIGINFO;
 	action.sa_sigaction = handler;
-	sigaction(SIGSEGV, &action, NULL);
 }
