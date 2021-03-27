@@ -2,7 +2,7 @@
 #include <curses.h>
 #include <stdlib.h>
 #include "gold_gloader.h"
-
+#include "gold_terminal.h"
 
 int main() {
 	int ch;
@@ -12,21 +12,24 @@ int main() {
 	game_t* base = gold_loadgame("games/gold/gold.so");
 	printf("gold base version: %08x\n",base->version());
 	printf("base license: %s\n",base->loadLicense());
+	settitle(base->loadTitle());
 	initscr();
-	raw();
+	cbreak();
 	noecho();
 	clear();
 	maxlines = LINES - 1;
 	maxcols = COLS - 1;
-	printw(0,0,"%s","F1 to exit");
+	//printw bringing up SIGSEV for some raisin.
+	//printw(0,0,"%s -- GOLD", base->loadName());
+	//printw(1,1,"%s","F1 to exit");
 	refresh();
-	main_window = create_newwin(3,10,maxlines/2,maxcols/2);
 
 	while((ch = getch()) != KEY_F(1)) {
-
+		
 	}
 
 	endwin();
+	puts("Goodbye!");
 	return 0;
 }
 

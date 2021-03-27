@@ -14,12 +14,12 @@ extern char* goldlib_loadTitle() {
 	return "GOLD Base Game";
 }
 
+// inner title
+extern char* goldlib_loadName() {
+	return "GOLD Base Game";
+}
+
 // about (game desc)
 extern char* goldLib_loadAbout() {
 	return "This is the base game for the GOLD engine";
-}
-
-// name for other things
-extern char* loadName() {
-	return "GOLD Base Game";
 }

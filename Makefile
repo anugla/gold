@@ -46,12 +46,21 @@ clean:
 
 goldso: ./goldso/gold.so
 	cp goldso/gold.so .
+
+.PHONY: preprun
 	
-run: ./build/goldlinux ./goldso/gold.so
+preprun: ./build/goldlinux ./goldso/gold.so
 	mkdir -p ./build/games
 	mkdir -p ./build/games/gold
 	cp goldso/gold.so ./build/games/gold/gold.so
+
+.PHONY: run
+
+run: preprun
 	cd build && ./goldlinux
+
+debug: preprun
+	cd build && gdb ./goldlinux dev
 
 -include $(DEPS)
 
