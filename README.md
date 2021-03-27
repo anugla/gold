@@ -11,3 +11,8 @@ How to build:
 	To build & run: make run
 
 	To build goldso: make goldso
+
+Building a GOLD Game:
+
+	Games are .so files. Refer to struct game in src/gold_gloader.h for more info and how they are loaded in src/gold_gloader.c .
+
