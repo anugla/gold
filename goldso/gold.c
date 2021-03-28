@@ -1,3 +1,6 @@
+
+#include <stdio.h>
+#include <stdlib.h>
 #include <stdint.h>
 #include "../src/gold_gstruct.h"
 
@@ -27,6 +30,21 @@ extern char* goldlib_loadName() {
 }
 
 // about (game desc)
-extern char* goldLib_loadAbout() {
+extern char* goldlib_loadAbout() {
 	return "This is the base game for the GOLD engine";
+}
+
+extern ginfo_t* goldlib_getInfo() {
+	ginfo_t* info = malloc(sizeof(ginfo_t));
+	info->type = TYPE_MISC;
+	info->rating = RATING_EVERYONE;
+	return info;
+}
+
+extern void goldlib_doFirstFrame() {
+
+}
+
+extern int goldlib_doFrame() {
+	return 0;
 }

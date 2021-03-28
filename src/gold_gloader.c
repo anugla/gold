@@ -10,5 +10,8 @@ game_t* gold_loadgame(char* name) {
 	loaded_game->loadTitle = dlsym(loaded_game->shared_object, "goldlib_loadTitle");
 	loaded_game->loadAbout = dlsym(loaded_game->shared_object, "goldlib_loadAbout");
 	loaded_game->loadName = dlsym(loaded_game->shared_object, "goldlib_loadName");
-	loaded_game->loadGStruct = dlsym(loaded_game->shared_object, "goldLib_loadGStruct");
+	loaded_game->loadGStruct = dlsym(loaded_game->shared_object, "goldlib_loadGStruct");
+	loaded_game->doFrame = dlsym(loaded_game->shared_object, "goldlib_doFrame");
+	loaded_game->getInfo = dlsym(loaded_game->shared_object, "goldlib_getInfo");
+	loaded_game->doFirstFrame = dlsym(loaded_game->shared_object, "goldlib_doFirstFrame");
 }

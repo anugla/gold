@@ -5,9 +5,11 @@ BUILD_DIR ?= ./build
 SRC_DIRS ?= ./src
 RESOURCE_DIRS ?= ./rsc
 RELEASE_DIRS ?= ./release
+GOLDSO_DIRS ?= ./goldso
 
 ARGS ?= dev
 SRCS := $(shell find $(SRC_DIRS) -name *.cpp -or -name *.c -or -name *.s)
+GSRCS := $(shell find $(SRC_DIRS) -name *.c)
 OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 RSCS := $(shell find $(RESOURCE_DIRS))
 DEPS := $(OBJS:.o=.d)
@@ -30,10 +32,8 @@ $(BUILD_DIR)/%.cpp.o: %.cpp
 	$(MKDIR_P) $(dir $@)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
 
-./goldso/gold.so: ./goldso/gold.c
-	$(CC) -c -Wall -Werror -fpic $<
-	mv ./gold.o ./goldso/
-	$(CC) -lcurses -shared -o ./goldso/gold.so ./goldso/gold.o
+./goldso/gold.so:
+	cd goldso && make
 
 .PHONY: clean
 

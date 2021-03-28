@@ -11,6 +11,9 @@ typedef struct game {
 	char* (*loadAbout)();
 	char* (*loadName)();
 	void (*loadGStruct)(gstruct_t*);
+	void (*doFirstFrame)();
+	int (*doFrame)(int ch);
+	ginfo_t* (*getInfo)();
 } game_t;
 
 game_t* gold_loadgame(char* name);

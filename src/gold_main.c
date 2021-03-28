@@ -1,5 +1,7 @@
 #include <stdio.h>
+#ifndef NOCURSES
 #include <curses.h>
+#endif
 #include <stdlib.h>
 #include <string.h>
 #include "gold_error.h"
@@ -9,7 +11,9 @@
 int main(int argc, char** argv) {
 	int ch;
 	int maxlines, maxcols;
+	#ifndef NOCURSES
 	WINDOW *main_window;
+	#endif
 	puts("goldLINUX 1.0\n");
 	reg_handler();
 	printf("argc: %i\n",argc);
@@ -26,6 +30,8 @@ int main(int argc, char** argv) {
 	printf("base license: %s\n",base->loadLicense());
 	settitle(base->loadTitle());
 	base->loadGStruct(gstruct);
+
+	#ifndef NOCURSES
 	initscr();
 	cbreak();
 	noecho();
@@ -36,9 +42,29 @@ int main(int argc, char** argv) {
 	//printw(0,0,"%s -- GOLD", base->loadName());
 	//printw(1,1,"%s","F1 to exit");
 	refresh();
+	#endif
 
+	ginfo_t* info = base->getInfo();
+	int s = 0;
+	int quitting = 0;
 	while((ch = getch()) != KEY_F(1)) {
-		
+		s = base->doFrame(ch);
+		switch(s) {
+			case 1: // exit gracefully
+				quitting = 1;
+				break;
+			case 2: // issue
+				quitting = 1;
+				break;
+			default:
+				break;
+		}
+		if(quitting == 1) {
+			if(s != 1) {
+				printf("Oops! Quitting with code %i",s);
+			}
+			break;
+		}
 	}
 
 	endwin();
